@@ -1,11 +1,11 @@
 import { FC } from 'react'
-//import styles from "./OutputFileName.module.scss";
+import styles from "./Action.module.scss";
 
 export const Action: FC = () => {
   return (
     <>
-      {' '}
-      <div>Action</div>{' '}
+      <button className={styles.cahcel}>Cancel</button>
+      <button className={styles.exec}>Execute</button>
     </>
   )
 }
