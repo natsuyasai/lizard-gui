@@ -1,5 +1,6 @@
 .cahcel {
-  @apply bg-gray-500 text-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded shadow;
+  @apply bg-gray-500 text-gray-100 font-semibold py-2 px-4 border border-gray-900 rounded shadow;
+  @apply m-4;
 }
 
 .cahcel:hover {
@@ -16,9 +17,13 @@
 }
 
 .exec:hover {
-    @apply bg-blue-200;
+  @apply bg-blue-200;
 }
 
 .exec:active {
-    @apply bg-blue-800;
+  @apply bg-blue-800;
+}
+
+button + button {
+  margin-left: 4px;
 }

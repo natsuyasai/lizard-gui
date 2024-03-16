@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from "./Action.module.scss";
+import styles from './Action.module.scss'
 
 export const Action: FC = () => {
   return (
