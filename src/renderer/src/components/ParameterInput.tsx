@@ -15,6 +15,7 @@ export const ParameterInput: FC<Props> = ({ parameter, setParameter }) => {
           className={styles.input}
           value={parameter}
           onChange={(e) => setParameter(e.target.value)}
+          placeholder="-h --version"
         ></input>
       </div>
     </>
