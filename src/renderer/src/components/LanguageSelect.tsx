@@ -1,33 +1,13 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styles from './LanguageSelect.module.scss'
+import { Language } from './types'
 
-enum Language {
-  AUTO = 'Auto',
-  C = 'C',
-  CPP = 'C++',
-  JAVA = 'Java',
-  CSHARP = 'C#',
-  JS = 'JavaScript',
-  TS = 'TypeScript',
-  OBJECTIVE_C = 'Objective-C',
-  SWIFT = 'Swift',
-  PYTHON = 'Python',
-  RUBY = 'Ruby',
-  TTCN_3 = 'TTCN-3',
-  PHP = 'PHP',
-  SCALA = 'Scala',
-  GDSCRIPT = 'GDScript',
-  GO = 'Golang',
-  LUA = 'Lua',
-  RUST = 'Rust',
-  FORTRAN = 'Fortran',
-  KOTLIN = 'Kotlin',
-  SOLIDITY = 'Solidity',
-  ERLANG = 'Erlang'
+interface Props {
+  selectedItem: Language
+  setSelectedItem: (value: Language) => void
 }
 
-export const LanguageSelect: FC = () => {
-  const [selectedItem, setSelectedItem] = useState(Language.AUTO)
+export const LanguageSelect: FC<Props> = ({ selectedItem, setSelectedItem }) => {
   return (
     <>
       <div className={styles.root}>

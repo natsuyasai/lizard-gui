@@ -1,9 +1,12 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styles from './OutputFileName.module.scss'
 
-export const OutputFileName: FC = () => {
-  const [filename, setFilename] = useState('output')
+interface Props {
+  filename: string
+  setFilename: (value: string) => void
+}
 
+export const OutputFileName: FC<Props> = ({ filename, setFilename }) => {
   return (
     <>
       <div className={styles.root}>

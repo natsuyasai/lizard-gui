@@ -1,22 +1,21 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styles from './FormatSelect.module.scss'
+import { Format } from './types'
 
-enum Format {
-  HTML = 'HTML',
-  CSV = 'CSV',
-  XML = 'XML'
+interface Props {
+  format: Format
+  setFormat: (value: Format) => void
 }
 
-export const FormatSelect: FC = () => {
-  const [selectedItem, setSelectedItem] = useState(Format.HTML)
+export const FormatSelect: FC<Props> = ({ format, setFormat }) => {
   return (
     <>
       <div className={styles.root}>
         <div>FormatSelect</div>
         <select
           className={styles.select}
-          value={selectedItem}
-          onChange={(e) => setSelectedItem(e.target.value as Format)}
+          value={format}
+          onChange={(e) => setFormat(e.target.value as Format)}
         >
           {Object.entries(Format).map(([key, value]) => {
             return (

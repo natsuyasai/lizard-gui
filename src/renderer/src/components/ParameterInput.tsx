@@ -1,17 +1,20 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styles from './ParameterInput.module.scss'
 
-export const ParameterInput: FC = () => {
-  const [filename, setFilename] = useState('')
+interface Props {
+  parameter: string
+  setParameter: (value: string) => void
+}
 
+export const ParameterInput: FC<Props> = ({ parameter, setParameter }) => {
   return (
     <>
       <div className={styles.root}>
         <div>ParameterInput</div>
         <input
           className={styles.input}
-          value={filename}
-          onChange={(e) => setFilename(e.target.value)}
+          value={parameter}
+          onChange={(e) => setParameter(e.target.value)}
         ></input>
       </div>
     </>

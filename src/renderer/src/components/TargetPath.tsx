@@ -1,9 +1,12 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styles from './TargetPath.module.scss'
 
-export const TargetPath: FC = () => {
-  const [targetPath, setTargetPath] = useState('')
+interface Props {
+  targetPath: string
+  setTargetPath: (value: string) => void
+}
 
+export const TargetPath: FC<Props> = ({ targetPath, setTargetPath }) => {
   const selectDirectory = async () => {
     const result = await window.dialogAPI.showOpenDialog({
       properties: ['openDirectory'],
