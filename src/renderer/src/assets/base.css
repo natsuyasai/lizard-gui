@@ -69,3 +69,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.execbutton {
+  @apply bg-blue-500 text-gray-100 font-semibold py-2 px-4 border border-blue-900 rounded shadow;
+}
+
+.execbutton:hover {
+  @apply bg-blue-200;
+}
+
+.execbutton:active {
+  @apply bg-blue-800;
+}

@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-template-columns: 100px 1fr 120px;
+  grid-template-columns: 100px 1fr 80px 80px;
   align-items: center;
 
   input[type='file'] {
@@ -10,7 +10,7 @@
 
 .input {
   margin: 0 8px;
-  padding: 4px 8px;
+  padding: 8px;
   border-radius: 4px;
   @apply text-gray-800;
 }
@@ -24,23 +24,10 @@
   display: inline-block;
   position: relative;
   cursor: pointer;
-  margin-right: 8px;
   text-align: center;
+  margin-right: 8px;
   &:hover {
     opacity: 0.7;
     transition: 0.3s ease-out;
-  }
-  &:after {
-    content: '選択されていません';
-    color: #333;
-    font-size: 14px;
-    height: 20px;
-    line-height: 20px;
-    position: absolute;
-    right: -140px;
-    top: calc(50% - 10px);
-  }
-  &.changed:after {
-    content: '';
   }
 }

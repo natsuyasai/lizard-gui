@@ -19,21 +19,40 @@ export const TargetPath: FC = () => {
       setTargetPath(file.path)
     }
   }
+
+  const selectDirectory = async () => {
+    const result = await window.dialogAPI.showOpenDialog({
+      properties: ['openDirectory'],
+      title: 'select directory'
+    })
+    if (result.filePaths.length === 0) {
+      return
+    }
+    setTargetPath(result.filePaths[0])
+  }
+
+  const selectFile = async () => {
+    const result = await window.dialogAPI.showOpenDialog({
+      properties: ['openFile'],
+      title: 'select directory'
+    })
+    if (result.filePaths.length === 0) {
+      return
+    }
+    setTargetPath(result.filePaths[0])
+  }
+
   return (
     <>
       <div className={styles.root}>
         <div>TargetPath</div>
         <input readOnly={true} className={styles.input} value={targetPath}></input>
-        <input
-          type="file"
-          directory=""
-          webkitdirectory=""
-          id="file-input"
-          onChange={selectFiles}
-        ></input>
-        <label htmlFor="file-input" className={styles.label}>
-          Select
-        </label>
+        <button className="execbutton" onClick={selectDirectory}>
+          Dir
+        </button>
+        <button className="execbutton" onClick={selectFile}>
+          File
+        </button>
       </div>
     </>
   )
