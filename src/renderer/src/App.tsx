@@ -6,7 +6,7 @@ import { ParameterInput } from './components/ParameterInput'
 import { Action } from './components/Action'
 import styles from './App.module.scss'
 import { useState } from 'react'
-import { Format, Language, LizardParameter } from './components/types'
+import { Format, Language, LizardParameter } from '../../types/types'
 import { FileNameValidator } from './validator/fileNameValidator'
 
 function App(): JSX.Element {
@@ -22,7 +22,7 @@ function App(): JSX.Element {
   const [enableExecute, setEnableExecute] = useState(false)
   const [enableCancel, setEnableCancel] = useState(false)
 
-  function execute(): void {
+  async function execute(): Promise<void> {
     const validator = new FileNameValidator(parameter.outputFileName)
     if (!validator.validate()) {
       window.dialogAPI.showModalMessageBox({
@@ -35,6 +35,9 @@ function App(): JSX.Element {
     }
     setEnableCancel(true)
     setEnableExecute(false)
+    await window.lizard.execute(parameter)
+    setEnableCancel(false)
+    setEnableExecute(true)
   }
 
   function cancel(): void {

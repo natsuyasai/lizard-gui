@@ -10,6 +10,7 @@ import {
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { LizardParameter } from '../types/types'
 
 function createWindow(): void {
   // Create the browser window.
@@ -95,4 +96,13 @@ ipcMain.handle('showModalMessageBox', async (_event, option: MessageBoxOptions) 
     return await dialog.showMessageBox(focusedWindows, option)
   }
   return await dialog.showMessageBox(option)
+})
+
+// lizardコマンド実行
+ipcMain.handle('lizardExecute', async (_event, parameter: LizardParameter) => {
+  return new Promise<boolean>((resolve) => {
+    // TODO: コマンド実行関連処理
+    parameter
+    resolve(true)
+  })
 })

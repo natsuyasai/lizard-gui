@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import styles from './LanguageSelect.module.scss'
-import { Language } from './types'
+import { Language } from '../../../types/types'
 
 interface Props {
   selectedItem: Language
