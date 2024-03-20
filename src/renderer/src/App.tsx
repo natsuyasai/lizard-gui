@@ -7,6 +7,7 @@ import { Action } from './components/Action'
 import styles from './App.module.scss'
 import { useState } from 'react'
 import { Format, Language, LizardParameter } from './components/types'
+import { FileNameValidator } from './validator/fileNameValidator'
 
 function App(): JSX.Element {
   const initParam: LizardParameter = {
@@ -22,6 +23,10 @@ function App(): JSX.Element {
   const [enableCancel, setEnableCancel] = useState(false)
 
   function execute(): void {
+    const validator = new FileNameValidator(parameter.outputFileName)
+    if (!validator.validate()) {
+      return
+    }
     setEnableCancel(true)
     setEnableExecute(false)
   }
