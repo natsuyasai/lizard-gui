@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const TargetPath: FC<Props> = ({ targetPath, setTargetPath }) => {
-  const selectDirectory = async () => {
+  async function selectDirectory() {
     const result = await window.dialogAPI.showOpenDialog({
       properties: ['openDirectory'],
       title: 'select directory'
@@ -18,7 +18,7 @@ export const TargetPath: FC<Props> = ({ targetPath, setTargetPath }) => {
     setTargetPath(result.filePaths[0])
   }
 
-  const selectFile = async () => {
+  async function selectFile() {
     const result = await window.dialogAPI.showOpenDialog({
       properties: ['openFile'],
       title: 'select directory'
