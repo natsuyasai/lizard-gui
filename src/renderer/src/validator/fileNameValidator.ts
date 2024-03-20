@@ -1,4 +1,4 @@
-const PROHIBITED_SYMBOLS = new RegExp('[\\/:*?<>|"]')
+const PROHIBITED_SYMBOLS = new RegExp('[\\\\/\\:*?<>|"]')
 const PROHIBITED_CHARACTERS = [
   'CON',
   'PRN',
