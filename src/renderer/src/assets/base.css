@@ -79,5 +79,9 @@ body {
 }
 
 .execbutton:active {
-  @apply bg-blue-800;
+  @apply bg-blue-700;
+}
+
+.execbutton:disabled {
+  @apply bg-blue-900;
 }

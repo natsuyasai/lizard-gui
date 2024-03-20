@@ -8,6 +8,10 @@
 }
 
 .cahcel:active {
+  @apply bg-gray-700;
+}
+
+.cahcel:disabled {
   @apply bg-gray-800;
 }
 
