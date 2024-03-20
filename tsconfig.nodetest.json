@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.node.json",
-  "include": ["electron.vite.config.*", "src/main/**/*.spec.ts", "src/preload/**/*.spec.ts", "src/logic/**/*.spec.ts"],
-  "compilerOptions": {
-    "composite": true,
-    "types": ["electron-vite/node","vitest/globals"]
-  }
-}

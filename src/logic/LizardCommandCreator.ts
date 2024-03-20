@@ -1,4 +1,4 @@
-import { Language, Format } from '../renderer/src/components/types'
+import { Language, Format } from '@/types/types'
 
 const LANGUAGE_TO_OPTIONSTR = new Map<Language, string>([
   [Language.AUTO, ''],

@@ -1,8 +1,16 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
-  "include": ["electron.vite.config.*", "src/main/**/*", "src/preload/**/*", "src/types"],
+  "include": ["electron.vite.config.*", "src/main/**/*", "src/preload/**/*", "src/logic/**/*", "src/types"],
   "compilerOptions": {
     "composite": true,
-    "types": ["electron-vite/node"]
+    "types": ["electron-vite/node"],
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "@renderer/*": [
+        "src/renderer/src/*"
+      ],
+      "@/*": ["./src/*"]
+    }
   }
 }

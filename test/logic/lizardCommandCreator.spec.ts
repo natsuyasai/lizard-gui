@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
-import { LizardCommandCreator } from '../lizardCommandCreator'
-import { Format, Language } from '../../renderer/src/components/types'
+import { LizardCommandCreator } from '@/logic/LizardCommandCreator'
+import { Format, Language } from '@/types/types'
 
 describe('入力情報からコマンドを生成', () => {
   test.each([
