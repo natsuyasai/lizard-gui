@@ -1,4 +1,12 @@
-import { app, shell, BrowserWindow, ipcMain, dialog, OpenDialogOptions } from 'electron'
+import {
+  app,
+  shell,
+  BrowserWindow,
+  ipcMain,
+  dialog,
+  OpenDialogOptions,
+  MessageBoxOptions
+} from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -78,4 +86,13 @@ app.on('window-all-closed', () => {
 // ダイアログ
 ipcMain.handle('showOpenDialog', async (_event, option: OpenDialogOptions) => {
   return await dialog.showOpenDialog(option)
+})
+
+// メッセージボックス
+ipcMain.handle('showModalMessageBox', async (_event, option: MessageBoxOptions) => {
+  const focusedWindows = BrowserWindow.getFocusedWindow()
+  if (focusedWindows) {
+    return await dialog.showMessageBox(focusedWindows, option)
+  }
+  return await dialog.showMessageBox(option)
 })

@@ -25,6 +25,12 @@ function App(): JSX.Element {
   function execute(): void {
     const validator = new FileNameValidator(parameter.outputFileName)
     if (!validator.validate()) {
+      window.dialogAPI.showModalMessageBox({
+        type: 'warning',
+        title: 'info',
+        message: 'Invalid FileName',
+        detail: 'The FileName contains invalid characters.'
+      })
       return
     }
     setEnableCancel(true)
