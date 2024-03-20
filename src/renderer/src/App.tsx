@@ -21,23 +21,23 @@ function App(): JSX.Element {
   const [enableExecute, setEnableExecute] = useState(false)
   const [enableCancel, setEnableCancel] = useState(false)
 
-  function execute() {
+  function execute(): void {
     setEnableCancel(true)
     setEnableExecute(false)
   }
 
-  function cancel() {
+  function cancel(): void {
     setEnableCancel(false)
     setEnableExecute(true)
   }
 
-  function updateTargetPath(targetPath: string) {
+  function updateTargetPath(targetPath: string): void {
     setParameter({ ...parameter, ...{ targetPath } })
     const canExecute = targetPath !== '' && parameter.outputFileName !== ''
     setEnableExecute(canExecute)
   }
 
-  function updateOutputFilename(outputFileName: string) {
+  function updateOutputFilename(outputFileName: string): void {
     setParameter({ ...parameter, ...{ outputFileName } })
     const canExecute = parameter.targetPath !== '' && outputFileName !== ''
     setEnableExecute(canExecute)
