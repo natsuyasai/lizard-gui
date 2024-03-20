@@ -33,7 +33,13 @@ function App(): JSX.Element {
 
   function updateTargetPath(targetPath: string) {
     setParameter({ ...parameter, ...{ targetPath } })
-    const canExecute = targetPath !== ''
+    const canExecute = targetPath !== '' && parameter.outputFileName !== ''
+    setEnableExecute(canExecute)
+  }
+
+  function updateOutputFilename(outputFileName: string) {
+    setParameter({ ...parameter, ...{ outputFileName } })
+    const canExecute = parameter.targetPath !== '' && outputFileName !== ''
     setEnableExecute(canExecute)
   }
 
@@ -56,7 +62,7 @@ function App(): JSX.Element {
           ></FormatSelect>
           <OutputFileName
             filename={parameter.outputFileName}
-            setFilename={(outputFileName) => setParameter({ ...parameter, ...{ outputFileName } })}
+            setFilename={(outputFileName) => updateOutputFilename(outputFileName)}
           ></OutputFileName>
           <ParameterInput
             parameter={parameter.addParameter}
