@@ -1,6 +1,5 @@
 import { describe, expect, test } from 'vitest'
 import { FileNameValidator } from '@renderer/validator/fileNameValidator'
-//import { FileNameValidator } from '../../../../src/renderer/src/validator/fileNameValidator'
 
 describe('ファイル名の確認', () => {
   test.each([

@@ -10,7 +10,7 @@ import {
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { LizardParameter } from '../types/types'
+import { LizardParameter } from '@/types/types'
 
 function createWindow(): void {
   // Create the browser window.

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import styles from './FormatSelect.module.scss'
-import { Format } from '../../../types/types'
+import { Format } from '@/types/types'
 
 interface Props {
   format: Format
