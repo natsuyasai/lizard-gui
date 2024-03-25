@@ -11,6 +11,9 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { LizardParameter } from '@/types/types'
+import { LizardCommandExecutor } from '@/logic/LizardCommandExecutor'
+import { RuntimeWrapper } from '@/logic/RuntimeWrapper'
+import { LizardCommandCreator } from '@/logic/LizardCommandCreator'
 
 function createWindow(): void {
   // Create the browser window.
@@ -102,7 +105,16 @@ ipcMain.handle('showModalMessageBox', async (_event, option: MessageBoxOptions) 
 ipcMain.handle('lizardExecute', async (_event, parameter: LizardParameter) => {
   return new Promise<boolean>((resolve) => {
     // TODO: コマンド実行関連処理
-    parameter
-    resolve(true)
+
+    const processExecutor = new RuntimeWrapper()
+    const commandCreator = new LizardCommandCreator(
+      parameter.targetPath,
+      parameter.language,
+      parameter.format,
+      parameter.outputFileName,
+      parameter.addParameter
+    )
+    const executor = new LizardCommandExecutor(processExecutor, commandCreator)
+    resolve(executor.exec())
   })
 })

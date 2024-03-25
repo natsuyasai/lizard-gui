@@ -1,46 +1,48 @@
+import { ChildProcess, exec } from 'child_process'
 import { ExternalProcessExecutor } from './ExternalProcessExecutor'
 
 export class RuntimeWrapper implements ExternalProcessExecutor {
   private isCancel: boolean = false
 
-  public exec() // terminal: string,
-  // terminalOption: string,
-  // execFileName: string,
-  // option: string
-  : boolean {
-    // try {
-    //     const options = option.split(" ")
-    //     const execCommand = (arrayListOf(terminal, terminalOption, execFileName) + options).filter { it.isNotEmpty() }
-    //     const processBuilder = ProcessBuilder(execCommand)
-    //     processBuilder.redirectError(ProcessBuilder.Redirect.DISCARD)
-    //     processBuilder.redirectOutput(ProcessBuilder.Redirect.DISCARD)
-    //     const process = processBuilder.start()
-    //     const exitedProcess = this.wait(process)
-    //     if(!exitedProcess) {
-    //         this.killProcess(process)
-    //     }
-    //     process.destroy()
-    //     process.exitValue() <= 0
-    // } catch (error) {
-    //     console.error(error)
-    //     return true
-    // }
-    return true
+  public exec(
+    terminal: string,
+    terminalOption: string,
+    execFileName: string,
+    option: string
+  ): boolean {
+    try {
+      const options = option.split(' ')
+      const execCommand = [terminal, terminalOption, execFileName, ...options].filter(
+        (item) => item !== ''
+      )
+      const childProcess = exec(execCommand.join(' '))
+      childProcess.stdout?.on('end', () => {})
+
+      this.wait(childProcess)
+      this.killProcess(childProcess)
+      return true
+    } catch (error) {
+      console.error(error)
+      return true
+    }
   }
 
   public cancel(): void {
     this.isCancel = true
   }
 
-  // private wait(process: Process): boolean {
-  //     let exited: boolean
-  //     do {
-  //         exited = process.waitFor(5, TimeUnit.SECONDS)
-  //     } while (!this.isCancel && !exited)
-  //     return exited
-  // }
+  private wait(childProcess: ChildProcess): number | null {
+    let exitCode: number | null = null
+    do {
+      exitCode = childProcess.exitCode
+    } while (!this.isCancel && exitCode === null)
+    return exitCode
+  }
 
-  // private killProcess(process: Process) {
-  //     process.descendants().forEach (processHandler => processHandler.destroy())
-  // }
+  private killProcess(childProcess: ChildProcess): void {
+    if (childProcess.pid) {
+      process.kill(childProcess.pid)
+    }
+    childProcess.kill()
+  }
 }
