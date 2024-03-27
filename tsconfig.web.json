@@ -11,12 +11,10 @@
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",
-    "rootDir": "./",
-    "baseUrl": "./",
     "types":["vitest/globals"],
     "paths": {
       "@renderer/*": [
-        "src/renderer/src/*"
+        "./src/renderer/src/*"
       ],
       "@/*": ["./src/*"]
     }

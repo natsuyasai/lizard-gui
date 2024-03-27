@@ -4,11 +4,9 @@
   "compilerOptions": {
     "composite": true,
     "types": ["electron-vite/node","vitest/globals"],
-    "rootDir": "./",
-    "baseUrl": "./",
     "paths": {
       "@renderer/*": [
-        "src/renderer/src/*"
+        "./src/renderer/src/*"
       ],
       "@/*": ["./src/*"]
     }
