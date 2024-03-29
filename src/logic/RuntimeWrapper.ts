@@ -22,6 +22,7 @@ export class RuntimeWrapper implements ExternalProcessExecutor {
       this.killProcess(childProcess)
       return true
     } catch (error) {
+      // TODO: Code 126が返却されたら、pythonの環境が整っていない可能性があるためメッセージ表示
       console.error(error)
       return true
     }

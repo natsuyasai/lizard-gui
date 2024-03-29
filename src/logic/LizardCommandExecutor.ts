@@ -6,9 +6,6 @@ export class LizardCommandExecutor {
   private readonly processExecutor: ExternalProcessExecutor
   private readonly commandCreator: LizardCommandCreator
 
-  private readonly execFileNameForWindows = 'resources\\command\\basecommand.bat'
-  private readonly execFileNameForLinux = 'resources/command/basecommand.sh'
-
   constructor(processExecutor: ExternalProcessExecutor, commandCreator: LizardCommandCreator) {
     this.processExecutor = processExecutor
     this.commandCreator = commandCreator
@@ -18,7 +15,7 @@ export class LizardCommandExecutor {
     return this.processExecutor.exec(
       this.getTerminal(),
       this.getTerminalOption(),
-      this.getExecFileName(),
+      this.getExecBaseCommand(),
       this.commandCreator.getOptions()
     )
   }
@@ -45,13 +42,14 @@ export class LizardCommandExecutor {
     }
     return '/c'
   }
-  private getExecFileName(): string {
+  private getExecBaseCommand(): string {
+    const windows = 'python -m lizard '
     if (isWindows()) {
-      return this.execFileNameForWindows
+      return windows
     }
     if (isLinux() || isMac()) {
-      return this.execFileNameForLinux
+      return 'python3 -m lizard '
     }
-    return this.execFileNameForWindows
+    return windows
   }
 }
