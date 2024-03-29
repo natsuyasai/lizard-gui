@@ -6,8 +6,8 @@ export class LizardCommandExecutor {
   private readonly processExecutor: ExternalProcessExecutor
   private readonly commandCreator: LizardCommandCreator
 
-  private readonly execFileNameForWindows = 'command\\basecommand.bat'
-  private readonly execFileNameForLinux = 'command/basecommand.sh'
+  private readonly execFileNameForWindows = 'resources\\command\\basecommand.bat'
+  private readonly execFileNameForLinux = 'resources/command/basecommand.sh'
 
   constructor(processExecutor: ExternalProcessExecutor, commandCreator: LizardCommandCreator) {
     this.processExecutor = processExecutor
