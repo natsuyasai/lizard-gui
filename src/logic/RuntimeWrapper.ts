@@ -4,12 +4,12 @@ import { ExternalProcessExecutor } from './ExternalProcessExecutor'
 export class RuntimeWrapper implements ExternalProcessExecutor {
   private isCancel: boolean = false
 
-  public exec(
+  public async exec(
     terminal: string,
     terminalOption: string,
     execFileName: string,
     option: string
-  ): boolean {
+  ): Promise<boolean> {
     try {
       const options = option.split(' ')
       const execCommand = [terminal, terminalOption, execFileName, ...options].filter(
@@ -18,7 +18,7 @@ export class RuntimeWrapper implements ExternalProcessExecutor {
       const childProcess = exec(execCommand.join(' '))
       childProcess.stdout?.on('end', () => {})
 
-      this.wait(childProcess)
+      await this.wait(childProcess)
       this.killProcess(childProcess)
       return true
     } catch (error) {
@@ -31,9 +31,14 @@ export class RuntimeWrapper implements ExternalProcessExecutor {
     this.isCancel = true
   }
 
-  private wait(childProcess: ChildProcess): number | null {
+  private sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+  }
+
+  private async wait(childProcess: ChildProcess): Promise<number | null> {
     let exitCode: number | null = null
     do {
+      await this.sleep(500)
       exitCode = childProcess.exitCode
     } while (!this.isCancel && exitCode === null)
     return exitCode

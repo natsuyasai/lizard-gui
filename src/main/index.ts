@@ -103,18 +103,14 @@ ipcMain.handle('showModalMessageBox', async (_event, option: MessageBoxOptions) 
 
 // lizardコマンド実行
 ipcMain.handle('lizardExecute', async (_event, parameter: LizardParameter) => {
-  return new Promise<boolean>((resolve) => {
-    // TODO: コマンド実行関連処理
-
-    const processExecutor = new RuntimeWrapper()
-    const commandCreator = new LizardCommandCreator(
-      parameter.targetPath,
-      parameter.language,
-      parameter.format,
-      parameter.outputFileName,
-      parameter.addParameter
-    )
-    const executor = new LizardCommandExecutor(processExecutor, commandCreator)
-    resolve(executor.exec())
-  })
+  const processExecutor = new RuntimeWrapper()
+  const commandCreator = new LizardCommandCreator(
+    parameter.targetPath,
+    parameter.language,
+    parameter.format,
+    parameter.outputFileName,
+    parameter.addParameter
+  )
+  const executor = new LizardCommandExecutor(processExecutor, commandCreator)
+  return executor.exec()
 })

@@ -14,7 +14,7 @@ export class LizardCommandExecutor {
     this.commandCreator = commandCreator
   }
 
-  public exec(): boolean {
+  public exec(): Promise<boolean> {
     return this.processExecutor.exec(
       this.getTerminal(),
       this.getTerminalOption(),
