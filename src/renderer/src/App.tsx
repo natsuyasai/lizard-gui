@@ -33,16 +33,24 @@ function App(): JSX.Element {
       })
       return
     }
+
+    updateExecuteButtonState()
+    await window.lizard.execute(parameter)
+    updateDefaultButtonState()
+  }
+
+  function updateExecuteButtonState(): void {
     setEnableCancel(true)
     setEnableExecute(false)
-    await window.lizard.execute(parameter)
+  }
+
+  function updateDefaultButtonState(): void {
     setEnableCancel(false)
     setEnableExecute(true)
   }
 
   function cancel(): void {
-    setEnableCancel(false)
-    setEnableExecute(true)
+    updateDefaultButtonState()
   }
 
   function updateTargetPath(targetPath: string): void {
