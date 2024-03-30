@@ -111,6 +111,6 @@ ipcMain.handle('lizardExecute', async (_event, parameter: LizardParameter) => {
     parameter.outputFileName,
     parameter.addParameter
   )
-  const executor = new LizardCommandExecutor(processExecutor, commandCreator)
+  const executor = new LizardCommandExecutor(processExecutor, commandCreator, parameter.baseCommand)
   return executor.exec()
 })

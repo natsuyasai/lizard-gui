@@ -5,17 +5,23 @@ import { isLinux, isMac, isWindows } from './util/PlatformUtil'
 export class LizardCommandExecutor {
   private readonly processExecutor: ExternalProcessExecutor
   private readonly commandCreator: LizardCommandCreator
+  private readonly commandBase: string
 
-  constructor(processExecutor: ExternalProcessExecutor, commandCreator: LizardCommandCreator) {
+  constructor(
+    processExecutor: ExternalProcessExecutor,
+    commandCreator: LizardCommandCreator,
+    commandBase: string
+  ) {
     this.processExecutor = processExecutor
     this.commandCreator = commandCreator
+    this.commandBase = commandBase
   }
 
   public exec(): Promise<boolean> {
     return this.processExecutor.exec(
       this.getTerminal(),
       this.getTerminalOption(),
-      this.getExecBaseCommand(),
+      this.commandBase,
       this.commandCreator.getOptions()
     )
   }
@@ -33,6 +39,7 @@ export class LizardCommandExecutor {
     }
     return 'cmd'
   }
+
   private getTerminalOption(): string {
     if (isWindows()) {
       return '/c'
@@ -41,15 +48,5 @@ export class LizardCommandExecutor {
       return ''
     }
     return '/c'
-  }
-  private getExecBaseCommand(): string {
-    const windows = 'python -m lizard '
-    if (isWindows()) {
-      return windows
-    }
-    if (isLinux() || isMac()) {
-      return 'python3 -m lizard '
-    }
-    return windows
   }
 }
