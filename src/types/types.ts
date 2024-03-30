@@ -30,9 +30,12 @@ export enum Format {
 }
 
 export interface LizardParameter {
+  baseCommand: string
   targetPath: string
   language: Language
   format: Format
   outputFileName: string
   addParameter: string
 }
+
+export const BaseCommand = 'python3 -m lizard '

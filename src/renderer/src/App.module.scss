@@ -12,7 +12,7 @@
   margin-bottom: 8px;
   grid-row: 1 / 2;
   display: grid;
-  grid-template-rows: repeat(5, 20%);
+  grid-template-rows: repeat(6, calc(1005 / 6));
 }
 
 .bottom {

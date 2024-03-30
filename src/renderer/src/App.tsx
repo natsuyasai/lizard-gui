@@ -6,11 +6,13 @@ import { ParameterInput } from './components/ParameterInput'
 import { Action } from './components/Action'
 import styles from './App.module.scss'
 import { useState } from 'react'
-import { Format, Language, LizardParameter } from '../../types/types'
+import { BaseCommand, Format, Language, LizardParameter } from '../../types/types'
 import { FileNameValidator } from './validator/fileNameValidator'
+import { CommandBaseInput } from './components/CommandBaseInput'
 
 function App(): JSX.Element {
   const initParam: LizardParameter = {
+    baseCommand: BaseCommand,
     targetPath: '',
     language: Language.AUTO,
     format: Format.HTML,
@@ -65,11 +67,22 @@ function App(): JSX.Element {
     setEnableExecute(canExecute)
   }
 
+  function updateBaseCommnad(baseCommand: string): void {
+    setParameter({ ...parameter, ...{ baseCommand } })
+    const canExecute =
+      parameter.targetPath !== '' && parameter.outputFileName !== '' && baseCommand !== ''
+    setEnableExecute(canExecute)
+  }
+
   return (
     <>
       <div className={styles.app_root}>
         {/* 入力 */}
         <div className={styles.contents}>
+          <CommandBaseInput
+            basecommand={parameter.baseCommand}
+            setBaseCommand={(baseCommand) => updateBaseCommnad(baseCommand)}
+          ></CommandBaseInput>
           <TargetPath
             targetPath={parameter.targetPath}
             setTargetPath={(targetPath) => updateTargetPath(targetPath)}
