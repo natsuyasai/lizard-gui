@@ -33,7 +33,14 @@ export const TargetPath: FC<Props> = ({ targetPath, setTargetPath }) => {
     <>
       <div className={styles.root}>
         <div>TargetPath</div>
-        <input readOnly={true} className={styles.input} value={targetPath}></input>
+        <input
+          readOnly={false}
+          className={styles.input}
+          value={targetPath}
+          onChange={(event) => {
+            setTargetPath(event.target.value)
+          }}
+        ></input>
         <button className={`${styles.dirbutton} execbutton`} onClick={selectDirectory}>
           Dir
         </button>
