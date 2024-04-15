@@ -1,6 +1,5 @@
 import { ExternalProcessExecutor } from './ExternalProcessExecutor'
 import { LizardCommandCreator } from './LizardCommandCreator'
-import { isLinux, isMac, isWindows } from './util/PlatformUtil'
 
 export class LizardCommandExecutor {
   private readonly processExecutor: ExternalProcessExecutor
@@ -18,35 +17,10 @@ export class LizardCommandExecutor {
   }
 
   public exec(): Promise<boolean> {
-    return this.processExecutor.exec(
-      this.getTerminal(),
-      this.getTerminalOption(),
-      this.commandBase,
-      this.commandCreator.getOptions()
-    )
+    return this.processExecutor.exec(this.commandBase, this.commandCreator.getOptions())
   }
 
   public cancel(): void {
     this.processExecutor.cancel()
-  }
-
-  private getTerminal(): string {
-    if (isWindows()) {
-      return 'cmd'
-    }
-    if (isLinux() || isMac()) {
-      return ''
-    }
-    return 'cmd'
-  }
-
-  private getTerminalOption(): string {
-    if (isWindows()) {
-      return '/c'
-    }
-    if (isLinux() || isMac()) {
-      return ''
-    }
-    return '/c'
   }
 }
